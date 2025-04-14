@@ -1,5 +1,5 @@
 # node version
-FROM node:20-slim
+FROM node:18
 
 # create working dir in docker
 WORKDIR /app
