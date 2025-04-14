@@ -25,3 +25,14 @@ jobs:
       - name: Push to Docker Hub
         run: docker push janjicdev/learn-docker:latest
 
+      # example of auto deploy to azure (azure web app for containers)
+      #- name: Deploy to Azure web app
+      #  uses: azure/webapps-deploy@v2
+      #  with:
+      #    app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+      #    publish-profile: |
+      #      {
+      #        "publishingUserName": "${{ secrets.AZURE_USERNAME }}",
+      #        "publishingPassword": "${{ secrets.AZURE_PASSWORD }}"
+      #      }
+      #    images: janjicdev/learn-docker:latest
