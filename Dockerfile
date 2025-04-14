@@ -7,5 +7,8 @@ WORKDIR /app
 # copy all files
 COPY . .
 
+# install packages required by node
+RUN npm install
+
 # start the app
 CMD [ "node", "app.js" ]
