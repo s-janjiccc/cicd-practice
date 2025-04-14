@@ -4,8 +4,6 @@ name: Test, Build & Push Docker image
 on:
   push:
     branches: [ main ]
-    tags:
-      - 'v*.*.*'
 
 jobs:
   test-and-push:
@@ -34,22 +32,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract version from tag
-        if: success()
-        id: extract_tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
       - name: Build Docker image
         if: success()
-        run: |
-          docker build -t janjicdev/learn-docker:latest -t janjicdev/learn-docker:${{ env.TAG }} .
+        run: docker build -t janjicdev/learn-docker:latest .
 
       - name: Push to Docker Hub
         if: success()
-        run: |
-          docker push janjicdev/learn-docker:latest
-          docker push janjicdev/learn-docker:${{ env.TAG }}
-
+        run: docker push janjicdev/learn-docker:latest
+          
       # example of auto deploy to azure (azure web app for containers)
       #- name: Deploy to Azure web app
       #  if: success()
